@@ -40,23 +40,34 @@ const Home = () => {
 		setAge(e.target.value)
 	}
 
-const fetchData = async (data) => {
-				await fetch(`${adminURL}/api/v1/vaccine/slot/find`, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(data),
-				})
-					.then((res) => res.json())
-					.then((res) => {
-            if (res.code === 200){
-              console.log("res", res)
-              setCode(200)
-            }
-          })
-					.catch((e) => console.log('error while Submission', e))
-			}
+	const fetchData = async (data) => {
+		await fetch(`${adminURL}/api/v1/vaccine/slot/find`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
+		})
+			.then((res) => res.json())
+			.then((res) => {
+				if (res.status === 1) {
+					console.log('res', res)
+					setPincode('')
+					setEmail('')
+					setAge('')
+					setDate(null)
+
+					setCode(200)
+				} else {
+					setPincode('')
+					setEmail('')
+					setAge('')
+					setDate(null)
+					setCode(500)
+				}
+			})
+			.catch((e) => console.log('error while Submission', e))
+	}
 
 	const handleSubmit = () => {
 		if (pinCode.length !== 6) {
@@ -75,7 +86,7 @@ const fetchData = async (data) => {
 				age,
 				date,
 			}
-      fetchData(data)
+			fetchData(data)
 		}
 	}
 

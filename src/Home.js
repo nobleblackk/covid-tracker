@@ -109,7 +109,7 @@ const Home = () => {
 						message={'You must fill in the Pincode, Email, Age, Name !!!'}
 					/>
 				))}
-			<div className='header'>Covid Vaccine Tracker</div>
+			<div className='header'>Covid Vaccine Slot Finder</div>
 			<div className='wrapper'>
 				<div style={{ marginBottom: '20px', width: '60%' }}>
 					<TextField
